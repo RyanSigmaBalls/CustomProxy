@@ -1,10 +1,16 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
+const fs = require('fs');
 const bcrypt = require('bcrypt');
 
-const dbPath = path.resolve(__dirname, '../../data/app.db');
+const dataDir = path.resolve(__dirname, '../../data');
+const dbPath = path.resolve(dataDir, 'app.db');
 const adminEmail = 'admin@customproxy.local';
 const adminPassword = 'admin123';
+
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+}
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
