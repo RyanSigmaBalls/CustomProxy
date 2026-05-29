@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Blank launcher for CustomProxy with an optional proxy search bar." />
+  <title>Blank Launcher | CustomProxy</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="blank-shell">
+  <div class="blank-card">
+    <h1>Blank Launcher</h1>
+    <p>Use this page to start fresh and launch proxy browsing without leaving CustomProxy.</p>
+    <form id="blank-search-form" class="search-form">
+      <div class="input-group">
+        <span class="search-icon">🔎</span>
+        <input id="blank-search-input" type="search" placeholder="Type a website or search term..." autocomplete="off" />
+      </div>
+      <button type="submit" class="primary-btn">Open in Proxy</button>
+    </form>
+    <div class="blank-actions">
+      <a href="/">Back to Search</a>
+      <a href="/history">History</a>
+      <a href="/bookmarks">Bookmarks</a>
+    </div>
+  </div>
+  <script>
+    const input = document.querySelector('#blank-search-input');
+    const form = document.querySelector('#blank-search-form');
+    const KNOWN = {
+      instagram: 'https://www.instagram.com',
+      insta: 'https://www.instagram.com',
+      youtube: 'https://www.youtube.com',
+      tiktok: 'https://www.tiktok.com',
+      reddit: 'https://www.reddit.com',
+      discord: 'https://discord.com',
+      google: 'https://www.google.com',
+    };
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const value = input.value.trim();
+      if (!value) return;
+      const target = KNOWN[value.toLowerCase()] || `https://${value}`;
+      window.location.href = `/proxy?target=${encodeURIComponent(target)}`;
+    });
+  </script>
+</body>
+</html>

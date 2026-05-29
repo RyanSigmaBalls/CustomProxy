@@ -14,13 +14,13 @@
         <div class="brand-mark">C</div>
         <div class="brand-copy">
           <h1>CustomProxy</h1>
-          <p>Search everything with style.</p>
+          <p>Search, proxy, and browse popular sites through one domain.</p>
         </div>
       </div>
       <nav class="top-nav">
-        <a href="/login">Login</a>
-        <a href="/signup">Sign Up</a>
-        <a href="/admin">Admin</a>
+        <a href="/history">History</a>
+        <a href="/bookmarks">Bookmarks</a>
+        <a href="/blank">Blank Launcher</a>
         <button id="theme-toggle" class="pill">Dark Mode</button>
       </nav>
     </header>
@@ -37,9 +37,19 @@
           <input id="search-input" name="q" type="search" placeholder="Search anything..." autocomplete="off" />
           <button id="voice-button" type="button" class="voice-button" aria-label="Voice search">🎙️</button>
         </div>
+        <div class="control-row">
+          <label class="select-label">Search engine</label>
+          <select id="search-engine" class="search-picker">
+            <option value="google">Google</option>
+            <option value="bing">Bing</option>
+            <option value="duckduckgo">DuckDuckGo</option>
+            <option value="brave">Brave</option>
+            <option value="customproxy">CustomProxy</option>
+          </select>
+        </div>
         <div id="suggestion-panel" class="suggestion-panel"></div>
         <div class="button-row">
-          <button type="submit" class="primary-btn">Google Search</button>
+          <button type="submit" class="primary-btn">Search</button>
           <button id="lucky-button" type="button" class="secondary-btn">I'm Feeling Lucky</button>
         </div>
       </form>

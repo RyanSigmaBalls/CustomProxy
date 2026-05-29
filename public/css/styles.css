@@ -185,6 +185,72 @@ input::placeholder {
   margin-top: 24px;
 }
 
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.search-picker {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 12px 18px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.select-label {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.results-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.blank-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+}
+
+.blank-card {
+  width: min(720px, 100%);
+  padding: 44px;
+  background: var(--surface);
+  border-radius: 32px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.blank-card h1 {
+  margin-bottom: 14px;
+}
+
+.blank-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.blank-actions a {
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .control-row,
+  .blank-actions,
+  .button-row {
+    justify-content: center;
+  }
+}
+
 .recent-section {
   background: var(--surface);
   border: 1px solid var(--border);

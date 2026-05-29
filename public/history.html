@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Proxy browsing history for CustomProxy." />
+  <title>History | CustomProxy</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="logo-row">
+        <div class="brand-mark">H</div>
+        <div>
+          <h1>Proxy History</h1>
+          <p>Track the pages you've visited through the custom proxy.</p>
+        </div>
+      </div>
+      <nav class="top-nav">
+        <a href="/">Search</a>
+        <a href="/bookmarks">Bookmarks</a>
+        <a href="/blank">Blank Launcher</a>
+      </nav>
+    </header>
+
+    <main class="admin-panel">
+      <div class="admin-card">
+        <h2>Recent sessions</h2>
+        <div id="history-table" class="table-list"></div>
+      </div>
+    </main>
+  </div>
+  <script src="/js/history.js"></script>
+</body>
+</html>

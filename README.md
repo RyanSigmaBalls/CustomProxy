@@ -54,15 +54,26 @@ Recommended deployment flow:
 2. Set environment variables: `PORT`, `SESSION_SECRET`
 3. Start the server: `npm start`
 
-### Deploying to Railway
+### Proxy search support
+
+CustomProxy now includes a built-in reverse proxy system that keeps browsing inside the app domain.
+
+- Browse blocked or popular sites from the custom search homepage
+- The proxy rewrites links, assets, and scripts when serving HTML
+- Remote pages load through `/proxy?target=https://example.com`
+- History and bookmarks are stored locally in SQLite
+- Includes a blank launcher page for clean browsing sessions
+- Supports popular sites such as Instagram, YouTube, Reddit, TikTok, Discord, and more
+
+## Deploying to Railway
 
 Railway supports Node.js apps directly and can deploy this project from GitHub.
 
-1. Commit and push all files, including `package.json`, `Procfile`, and `start.sh`, to GitHub.
+1. Commit and push all files, including `package.json`, `Procfile`, `start.sh`, and `railway.json`, to GitHub.
 2. Create a Railway project and connect the repository.
 3. Add environment variables in Railway:
-   - `PORT` (Railway will provide one automatically)
    - `SESSION_SECRET`
+   - optionally `NODE_ENV=production`
 4. Use the included `Procfile`:
    - `web: npm start`
 

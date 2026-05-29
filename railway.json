@@ -1,0 +1,9 @@
+{
+  "build": {
+    "builder": "herokuish",
+    "buildCommand": "npm install"
+  },
+  "deploy": {
+    "startCommand": "npm start"
+  }
+}

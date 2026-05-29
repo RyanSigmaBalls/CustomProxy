@@ -6,6 +6,22 @@ const summary = document.querySelector('#results-summary');
 const pagination = document.querySelector('#pagination-controls');
 const form = document.querySelector('#search-form');
 const searchInput = document.querySelector('#search-input');
+const proxyButton = document.querySelector('#proxy-button');
+
+const KNOWN_SITES = {
+  instagram: 'https://www.instagram.com',
+  insta: 'https://www.instagram.com',
+  youtube: 'https://www.youtube.com',
+  tiktok: 'https://www.tiktok.com',
+  reddit: 'https://www.reddit.com',
+  discord: 'https://discord.com',
+  google: 'https://www.google.com',
+  twitter: 'https://x.com',
+};
+
+function siteTargetForQuery(value) {
+  return KNOWN_SITES[value.toLowerCase()] || null;
+}
 
 async function renderSearch() {
   if (!query) {
@@ -23,24 +39,21 @@ async function renderSearch() {
     const results = data.results || [];
     summary.textContent = `${data.total} results found for "${query}"`;
 
-    if (results.length === 0) {
-      resultsContainer.innerHTML = '<p class="muted-text">No results matched your query. Try another search.</p>';
-      return;
-    }
-
-    resultsContainer.innerHTML = results
-      .map(
-        (item) => `
+    resultsContainer.innerHTML = results.length
+      ? results
+          .map(
+            (item) => `
       <article class="result-card">
-        <a href="${item.url}" target="_blank" rel="noopener noreferrer">
+        <a href="/proxy?target=${encodeURIComponent(item.url)}" target="_self">
           <h3>${item.title}</h3>
         </a>
         <p>${item.description}</p>
         <p class="muted-text">${item.source}</p>
       </article>
     `
-      )
-      .join('');
+          )
+          .join('')
+      : '<p class="muted-text">No results matched your query. Try another search.</p>';
 
     renderPagination(data.page, data.totalPages);
   } catch (error) {
@@ -72,6 +85,13 @@ if (form) {
     const nextQuery = searchInput.value.trim();
     if (!nextQuery) return;
     window.location.href = `/search?q=${encodeURIComponent(nextQuery)}`;
+  });
+}
+
+if (proxyButton) {
+  proxyButton.addEventListener('click', () => {
+    const target = siteTargetForQuery(query) || `https://${query}`;
+    window.location.href = `/proxy?target=${encodeURIComponent(target)}`;
   });
 }
 

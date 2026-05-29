@@ -52,6 +52,26 @@ function initDatabase() {
       )`
     );
 
+    db.run(
+      `CREATE TABLE IF NOT EXISTS bookmarks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        url TEXT NOT NULL,
+        notes TEXT,
+        createdAt TEXT NOT NULL
+      )`
+    );
+
+    db.run(
+      `CREATE TABLE IF NOT EXISTS proxy_history (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        targetUrl TEXT NOT NULL,
+        pageTitle TEXT,
+        statusCode INTEGER,
+        createdAt TEXT NOT NULL
+      )`
+    );
+
     const now = new Date().toISOString();
     const sql = 'SELECT id FROM users WHERE email = ? LIMIT 1';
     db.get(sql, [adminEmail], async (err, entry) => {

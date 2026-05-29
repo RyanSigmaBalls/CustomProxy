@@ -10,6 +10,9 @@ const morgan = require('morgan');
 const authRoutes = require('./routes/authRoutes');
 const searchRoutes = require('./routes/searchRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const proxyRoutes = require('./routes/proxyRoutes');
+const bookmarkRoutes = require('./routes/bookmarkRoutes');
+const historyRoutes = require('./routes/historyRoutes');
 const { initDatabase } = require('./models/db');
 const { securityHeaders } = require('./middleware/securityMiddleware');
 
@@ -46,14 +49,20 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/api/auth', authRoutes);
 app.use('/api/search', searchRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/bookmarks', bookmarkRoutes);
+app.use('/api/history', historyRoutes);
+app.use('/proxy', proxyRoutes);
 
-app.get(['/', '/login', '/signup', '/search', '/admin'], (req, res) => {
+app.get(['/', '/login', '/signup', '/search', '/admin', '/history', '/bookmarks', '/blank'], (req, res) => {
   const routeMap = {
     '/': 'index.html',
     '/login': 'login.html',
     '/signup': 'signup.html',
     '/search': 'search.html',
     '/admin': 'admin.html',
+    '/history': 'history.html',
+    '/bookmarks': 'bookmarks.html',
+    '/blank': 'blank.html',
   };
   res.sendFile(path.join(__dirname, '../public', routeMap[req.path]));
 });

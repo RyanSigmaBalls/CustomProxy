@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bookmark your favorite proxy pages with CustomProxy." />
+  <title>Bookmarks | CustomProxy</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="logo-row">
+        <div class="brand-mark">B</div>
+        <div>
+          <h1>Bookmarks</h1>
+          <p>Save quick access links for your favorite proxy destinations.</p>
+        </div>
+      </div>
+      <nav class="top-nav">
+        <a href="/">Search</a>
+        <a href="/history">History</a>
+        <a href="/blank">Blank Launcher</a>
+      </nav>
+    </header>
+
+    <main class="admin-panel">
+      <div class="admin-card">
+        <form id="bookmark-form" class="auth-form">
+          <h2>Add bookmark</h2>
+          <label>Title</label>
+          <input id="bookmark-title" type="text" required />
+          <label>URL</label>
+          <input id="bookmark-url" type="url" required />
+          <label>Notes</label>
+          <textarea id="bookmark-notes" rows="3"></textarea>
+          <button type="submit" class="primary-btn">Save Bookmark</button>
+        </form>
+      </div>
+      <div class="admin-card">
+        <h2>Saved bookmarks</h2>
+        <div id="bookmark-table" class="table-list"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/bookmarks.js"></script>
+</body>
+</html>
