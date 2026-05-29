@@ -12,7 +12,7 @@ async function loadHistory() {
             .map(
               (item) => `
                 <tr>
-                  <td><a href="/proxy?target=${encodeURIComponent(item.targetUrl)}" target="_self">${item.targetUrl}</a></td>
+                  <td><a href="/service/?target=${encodeURIComponent(item.targetUrl)}" target="_self">${item.targetUrl}</a></td>
                   <td>${item.pageTitle || 'N/A'}</td>
                   <td>${item.statusCode}</td>
                   <td>${new Date(item.createdAt).toLocaleString()}</td>

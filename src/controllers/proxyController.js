@@ -31,7 +31,7 @@ function normalizeUrl(value) {
 }
 
 function buildProxyUrl(url) {
-  return `/proxy?target=${encodeURIComponent(url)}`;
+  return `/service/?target=${encodeURIComponent(url)}`;
 }
 
 function isDataUrl(value) {
@@ -167,44 +167,10 @@ async function proxyHandler(req, res) {
       return res.status(400).send('No valid proxy target specified.');
     }
 
-    const urlObject = new URL(target);
-    const fetchHeaders = {
-      'User-Agent': req.headers['user-agent'] || 'Mozilla/5.0 (CustomProxy)',
-      Accept: req.headers.accept || '*/*',
-      Referer: req.headers.referer || urlObject.origin,
-      'Accept-Language': req.headers['accept-language'] || 'en-US,en;q=0.9',
-    };
-
-    const proxyResponse = await fetch(target, {
-      method: 'GET',
-      headers: fetchHeaders,
-      redirect: 'follow',
-    });
-
-    const contentType = proxyResponse.headers.get('content-type') || 'application/octet-stream';
-    const statusCode = proxyResponse.status;
-    const setCookie = proxyResponse.headers.get('set-cookie');
-    if (setCookie) {
-      res.setHeader('set-cookie', setCookie);
-    }
-    res.setHeader('x-proxied-by', 'CustomProxy');
-
-    if (contentType.includes('text/html')) {
-      const html = await proxyResponse.text();
-      const titleMatch = html.match(/<title>(.*?)<\/title>/i);
-      const pageTitle = titleMatch ? titleMatch[1].trim() : '';
-      const rewritten = rewriteHTML(html, proxyResponse.url);
-      await addProxyHistory({ targetUrl: target, pageTitle, statusCode });
-      res.type('html').send(rewritten);
-      return;
-    }
-
-    const buffer = await proxyResponse.arrayBuffer();
-    await addProxyHistory({ targetUrl: target, pageTitle: '', statusCode });
-    res.type(contentType).send(Buffer.from(buffer));
+    return res.redirect(302, buildProxyUrl(target));
   } catch (error) {
-    console.error('Proxy error:', error);
-    res.status(500).send('Proxy request failed. The target may be blocked or unsupported.');
+    console.error('Proxy redirect error:', error);
+    res.status(500).send('Proxy redirect failed.');
   }
 }
 

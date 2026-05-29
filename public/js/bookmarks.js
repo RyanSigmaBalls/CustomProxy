@@ -14,7 +14,7 @@ async function loadBookmarks() {
               (item) => `
                 <tr>
                   <td>${item.title}</td>
-                  <td><a href="/proxy?target=${encodeURIComponent(item.url)}">Open</a></td>
+                  <td><a href="/service/?target=${encodeURIComponent(item.url)}">Open</a></td>
                   <td>${item.notes || '—'}</td>
                   <td>${new Date(item.createdAt).toLocaleString()}</td>
                   <td><button class="secondary-btn delete-bookmark" data-id="${item.id}">Delete</button></td>

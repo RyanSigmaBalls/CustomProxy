@@ -103,7 +103,7 @@ async function feelingLucky() {
   if (!query) return;
   const proxyTarget = selectProxyTarget(query);
   if (proxyTarget) {
-    window.location.href = `/proxy?target=${encodeURIComponent(proxyTarget)}`;
+    window.location.href = `/service/?target=${encodeURIComponent(proxyTarget)}`;
     return;
   }
 
@@ -111,7 +111,7 @@ async function feelingLucky() {
     const res = await fetch(`/api/search/lucky?q=${encodeURIComponent(query)}`);
     const data = await res.json();
     if (data.result && data.result.url) {
-      window.location.href = `/proxy?target=${encodeURIComponent(data.result.url)}`;
+      window.location.href = `/service/?target=${encodeURIComponent(data.result.url)}`;
     }
   } catch (error) {
     console.error('Lucky search failed:', error);
@@ -158,7 +158,7 @@ document.querySelector('#search-form')?.addEventListener('submit', (event) => {
   const proxyTarget = selectProxyTarget(query);
 
   if (proxyTarget) {
-    window.location.href = `/proxy?target=${encodeURIComponent(proxyTarget)}`;
+    window.location.href = `/service/?target=${encodeURIComponent(proxyTarget)}`;
     return;
   }
 

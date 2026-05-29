@@ -41,7 +41,7 @@
       const value = input.value.trim();
       if (!value) return;
       const target = KNOWN[value.toLowerCase()] || `https://${value}`;
-      window.location.href = `/proxy?target=${encodeURIComponent(target)}`;
+      window.location.href = `/service/?target=${encodeURIComponent(target)}`;
     });
   </script>
 </body>

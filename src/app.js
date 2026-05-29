@@ -11,6 +11,7 @@ const authRoutes = require('./routes/authRoutes');
 const searchRoutes = require('./routes/searchRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const proxyRoutes = require('./routes/proxyRoutes');
+const serviceProxy = require('./middleware/reverseProxy');
 const bookmarkRoutes = require('./routes/bookmarkRoutes');
 const historyRoutes = require('./routes/historyRoutes');
 const { initDatabase } = require('./models/db');
@@ -51,7 +52,11 @@ app.use('/api/search', searchRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/bookmarks', bookmarkRoutes);
 app.use('/api/history', historyRoutes);
+// legacy simple proxy route (kept for compatibility)
 app.use('/proxy', proxyRoutes);
+
+// main reverse proxy service that handles full proxying at /service/*
+app.use('/service', serviceProxy);
 
 app.get(['/', '/login', '/signup', '/search', '/admin', '/history', '/bookmarks', '/blank'], (req, res) => {
   const routeMap = {
