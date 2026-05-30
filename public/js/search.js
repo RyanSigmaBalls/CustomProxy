@@ -44,7 +44,7 @@ async function renderSearch() {
           .map(
             (item) => `
       <article class="result-card">
-        <a href="/proxy?target=${encodeURIComponent(item.url)}" target="_self">
+        <a href="/service/?target=${encodeURIComponent(item.url)}" target="_self">
           <h3>${item.title}</h3>
         </a>
         <p>${item.description}</p>
@@ -91,7 +91,7 @@ if (form) {
 if (proxyButton) {
   proxyButton.addEventListener('click', () => {
     const target = siteTargetForQuery(query) || `https://${query}`;
-    window.location.href = `/proxy?target=${encodeURIComponent(target)}`;
+    window.location.href = `/service/?target=${encodeURIComponent(target)}`;
   });
 }
 

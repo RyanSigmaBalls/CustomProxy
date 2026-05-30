@@ -37,6 +37,30 @@ npm run dev
 http://localhost:4000
 ```
 
+## Docker Deployment
+
+This app can run in a container using the included `Dockerfile`.
+
+Build and run locally:
+
+```bash
+docker build -t customproxy .
+docker run -p 4000:4000 --env-file .env customproxy
+```
+
+The container exposes port `4000` and honors `PORT` and `SESSION_SECRET` from `.env`.
+
+## Railway Deployment
+
+Railway can deploy this project using the existing `Procfile` and `Dockerfile`.
+
+1. Push the repository to GitHub.
+2. Create a Railway project and connect the repo.
+3. Set the environment variables:
+   - `PORT`
+   - `SESSION_SECRET`
+4. Use the default `web: npm start` command, or enable Docker deployment with the included `Dockerfile`.
+
 ## Admin Access
 
 The first admin user is created automatically when the app starts.
@@ -60,7 +84,7 @@ CustomProxy now includes a built-in reverse proxy system that keeps browsing ins
 
 - Browse blocked or popular sites from the custom search homepage
 - The proxy rewrites links, assets, and scripts when serving HTML
-- Remote pages load through `/proxy?target=https://example.com`
+- Remote pages load through `/service/?target=https://example.com`
 - History and bookmarks are stored locally in SQLite
 - Includes a blank launcher page for clean browsing sessions
 - Supports popular sites such as Instagram, YouTube, Reddit, TikTok, Discord, and more
